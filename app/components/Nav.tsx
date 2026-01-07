@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     // Smooth scroll for navigation links
@@ -26,9 +27,14 @@ export default function Nav() {
       }
     };
 
-    // Sticky nav on scroll
+    // Check if mobile
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth <= 1024);
+    };
+
+    // Sticky nav on scroll - desktop only
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.innerWidth > 1024 && window.scrollY > 50) {
         setIsSticky(true);
       } else {
         setIsSticky(false);
@@ -37,13 +43,16 @@ export default function Nav() {
 
     document.addEventListener("click", handleSmoothScroll);
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", checkIfMobile);
 
-    // Initial check
+    // Initial checks
+    checkIfMobile();
     handleScroll();
 
     return () => {
       document.removeEventListener("click", handleSmoothScroll);
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", checkIfMobile);
     };
   }, []);
 
@@ -52,7 +61,7 @@ export default function Nav() {
   };
 
   return (
-    <nav className={isSticky ? "sticky" : ""}>
+    <nav className={isSticky && !isMobile ? "sticky" : ""}>
       <div className="logo">JAXA</div>
 
       {/* Burger menu for mobile */}

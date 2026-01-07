@@ -29,17 +29,18 @@ body {
     position: relative;
 }
 
-/* Sticky nav on scroll */
-nav.sticky {
-    background: rgba(0, 0, 0, 0.95) !important;
-    backdrop-filter: blur(25px) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    border-radius: 0;
-    padding: 0.8rem 1.5rem !important;
+/* Sticky nav on scroll - desktop only */
+@media (min-width: 1025px) {
+    nav.sticky {
+        background: rgba(0, 0, 0, 0.95) !important;
+        backdrop-filter: blur(25px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        top: 2rem !important;
+        left: 2rem !important;
+        width: auto !important;
+        border-radius: 4px;
+        padding: 1rem 0.8rem !important;
+    }
 }
 
 .burger-line {
@@ -752,7 +753,7 @@ footer p {
 
 /* MOBILE */
 @media (max-width: 1024px) {
-    /* Navigation improvements */
+    /* Navigation improvements - mobile only */
     nav {
         flex-direction: row;
         justify-content: space-between;
@@ -767,9 +768,10 @@ footer p {
         backdrop-filter: blur(20px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        position: sticky;
+        position: fixed;
         z-index: 1000;
         transition: all 0.3s ease;
+        border-radius: 0;
     }
 
     .burger-menu {
@@ -1089,6 +1091,7 @@ footer p {
         right: 0;
         padding: 0.7rem 1rem;
         width: 100%;
+        border-radius: 0;
     }
 
     .burger-menu {
