@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState, useRef } from "react";
 
 const projects = [
   {
@@ -54,8 +55,32 @@ const projects = [
 ];
 
 export default function Projects() {
+  const [scrollY, setScrollY] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const scrollPosition = window.scrollY - rect.top;
+        setScrollY(scrollPosition);
+
+        // Update CSS variable for parallax effect
+        document.documentElement.style.setProperty(
+          "--scroll-y",
+          `${scrollPosition}px`,
+        );
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial call
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="projects-section" id="projets">
+    <section className="projects-section" id="projets" ref={sectionRef}>
       <div className="projects-title-vertical">PROJETS</div>
       <div className="section-header-projects">
         <h2 className="section-title-projects">PROJETS</h2>
@@ -63,7 +88,10 @@ export default function Projects() {
       <div className="projects-container">
         <div className="projects-grid">
           {projects.map((project, index) => (
-            <div key={project.id} className="project-card">
+            <div
+              key={project.id}
+              className={`project-card parallax-${index + 1}`}
+            >
               <div className="project-image">
                 <div
                   style={{

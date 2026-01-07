@@ -68,31 +68,64 @@ export default function Nav() {
       <button
         className="burger-menu"
         onClick={toggleMenu}
-        aria-label="Toggle navigation menu"
+        aria-label={
+          isMenuOpen ? "Close navigation menu" : "Open navigation menu"
+        }
       >
         <span className={`burger-line ${isMenuOpen ? "open" : ""}`}></span>
         <span className={`burger-line ${isMenuOpen ? "open" : ""}`}></span>
         <span className={`burger-line ${isMenuOpen ? "open" : ""}`}></span>
       </button>
 
+      <div
+        className={`mobile-menu-overlay ${isMenuOpen ? "open" : ""}`}
+        onClick={toggleMenu}
+      ></div>
+
       <ul className={`nav-links ${isMenuOpen ? "open" : ""}`}>
+        <li className="mobile-menu-header">
+          <button
+            className="mobile-close-btn"
+            onClick={toggleMenu}
+            aria-label="Close menu"
+          >
+            <span className="close-line"></span>
+            <span className="close-line"></span>
+          </button>
+        </li>
         <li>
-          <a href="#accueil" className="nav-link">
+          <a
+            href="#accueil"
+            className="nav-link"
+            onClick={() => setIsMenuOpen(false)}
+          >
             ACCUEIL
           </a>
         </li>
         <li>
-          <a href="#projets" className="nav-link">
+          <a
+            href="#projets"
+            className="nav-link"
+            onClick={() => setIsMenuOpen(false)}
+          >
             PROJETS
           </a>
         </li>
         <li>
-          <a href="#expertise" className="nav-link">
+          <a
+            href="#expertise"
+            className="nav-link"
+            onClick={() => setIsMenuOpen(false)}
+          >
             EXPERTISE
           </a>
         </li>
         <li>
-          <a href="#contact" className="nav-link">
+          <a
+            href="#contact"
+            className="nav-link"
+            onClick={() => setIsMenuOpen(false)}
+          >
             CONTACT
           </a>
         </li>
