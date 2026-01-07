@@ -407,6 +407,8 @@ nav {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    position: relative !important;
+    z-index: 1;
 }
 
 .project-image::before {
@@ -924,39 +926,40 @@ footer p {
     .project-card {
         max-width: 90%;
         margin: 0 auto;
-        opacity: 1 !important;
-        visibility: visible !important;
+        opacity: 1;
+        visibility: visible;
+        height: 400px;
     }
 
     /* Apply mobile tilts - visible rotations */
     .project-card:nth-child(1) {
-        transform: rotate(-2deg) !important;
-        margin-top: 0 !important;
+        transform: rotate(-2deg);
+        margin-top: 0;
     }
 
     .project-card:nth-child(2) {
-        transform: rotate(1deg) !important;
-        margin-top: 2rem !important;
+        transform: rotate(1deg);
+        margin-top: 2rem;
     }
 
     .project-card:nth-child(3) {
-        transform: rotate(1deg) !important;
-        margin-top: -1rem !important;
+        transform: rotate(1deg);
+        margin-top: -1rem;
     }
 
     .project-card:nth-child(4) {
-        transform: rotate(-1deg) !important;
-        margin-top: 1rem !important;
+        transform: rotate(-1deg);
+        margin-top: 1rem;
     }
 
     .project-card:nth-child(5) {
-        transform: rotate(2deg) !important;
-        margin-top: -0.5rem !important;
+        transform: rotate(2deg);
+        margin-top: -0.5rem;
     }
 
     .project-card:nth-child(6) {
-        transform: rotate(-1deg) !important;
-        margin-top: 1.5rem !important;
+        transform: rotate(-1deg);
+        margin-top: 1.5rem;
     }
 
     .project-number {
@@ -1143,8 +1146,9 @@ footer p {
 
     .project-card {
         max-width: 85%;
-        opacity: 1 !important;
-        visibility: visible !important;
+        opacity: 1;
+        visibility: visible;
+        height: 350px;
     }
 
     .project-number {
