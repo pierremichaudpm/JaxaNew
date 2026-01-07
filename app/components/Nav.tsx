@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
     // Smooth scroll for navigation links
@@ -25,8 +26,25 @@ export default function Nav() {
       }
     };
 
+    // Sticky nav on scroll
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
     document.addEventListener("click", handleSmoothScroll);
-    return () => document.removeEventListener("click", handleSmoothScroll);
+    window.addEventListener("scroll", handleScroll);
+
+    // Initial check
+    handleScroll();
+
+    return () => {
+      document.removeEventListener("click", handleSmoothScroll);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const toggleMenu = () => {
@@ -34,7 +52,7 @@ export default function Nav() {
   };
 
   return (
-    <nav>
+    <nav className={isSticky ? "sticky" : ""}>
       <div className="logo">JAXA</div>
 
       {/* Burger menu for mobile */}

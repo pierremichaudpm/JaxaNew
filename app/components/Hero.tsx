@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 export default function Hero() {
   return (
@@ -15,10 +15,14 @@ export default function Hero() {
       <div className="floating-shape shape-circle"></div>
       <div className="floating-shape shape-square"></div>
       <div className="hero-content">
-        <h1 className="hero-title">JAXA</h1>
-        <p className="hero-subtitle">Nous créons des expériences immersives où culture, humain et créativité rayonnent.</p>
-        <p className="hero-tagline">Nos expériences touchent, inspirent et rassemblent.</p>
+        <p className="hero-subtitle">
+          Nous créons des expériences immersives où culture, humain et
+          créativité rayonnent.
+        </p>
+        <p className="hero-tagline">
+          Nos expériences touchent, inspirent et rassemblent.
+        </p>
       </div>
     </section>
-  )
+  );
 }
