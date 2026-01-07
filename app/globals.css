@@ -1,4 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap");
+
+/* Fix mobile overflow */
+html,
+body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+* {
+    box-sizing: border-box;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -95,12 +106,15 @@ nav.sticky {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    max-width: 100%;
 }
 
 body {
     font-family: "Space Grotesk", sans-serif;
     overflow-x: hidden;
     background: #000;
+    max-width: 100vw;
+    width: 100%;
 }
 
 /* NAV - FLOATING */
@@ -221,7 +235,13 @@ nav {
     color: white;
     margin-bottom: 2rem;
     text-shadow: 0 0 80px rgba(0, 0, 0, 0.8);
-    display: none; /* Remove JAXA from hero - already in header */
+}
+
+/* Hide JAXA title on mobile */
+@media (max-width: 1024px) {
+    .hero-title {
+        display: none;
+    }
 }
 
 .hero-subtitle {
@@ -740,6 +760,7 @@ footer p {
         right: 0;
         padding: 0.8rem 1.5rem;
         width: 100%;
+        max-width: 100vw;
         background: rgba(0, 0, 0, 0.9);
         backdrop-filter: blur(20px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -829,7 +850,7 @@ footer p {
     }
 
     .hero-content {
-        bottom: 12rem; /* Remonté de 15px */
+        bottom: 16rem; /* Remonté de 20px */
         padding: 0 1.5rem;
         width: 100%;
     }
@@ -839,7 +860,7 @@ footer p {
         letter-spacing: -14px;
         margin-bottom: 1.5rem;
         text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
-        display: none; /* Remove JAXA from hero on mobile */
+        display: none; /* Hide on mobile */
     }
 
     .hero-subtitle {
@@ -873,8 +894,8 @@ footer p {
 
     /* Projects section fixes */
     .projects-section {
-        margin-top: -5vh; /* Éloigné du hero */
-        clip-path: polygon(0 5vh, 100% 0, 100% 100%, 0 100%);
+        margin-top: -8vh;
+        clip-path: polygon(0 8vh, 100% 0, 100% 100%, 0 100%);
         min-height: auto;
     }
 
@@ -883,7 +904,7 @@ footer p {
     }
 
     .section-header-projects {
-        padding: 12vh 1.5rem 3rem 1.5rem; /* Plus d'espace */
+        padding: 10vh 1.5rem 3rem 1.5rem;
     }
 
     .section-title-projects {
@@ -901,18 +922,20 @@ footer p {
     }
 
     .project-card {
-        max-width: 85%; /* Réduit la grosseur des affiches */
+        max-width: 90%;
         margin: 0 auto;
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 
-    /* Apply mobile tilts */
+    /* Apply mobile tilts - visible rotations */
     .project-card:nth-child(1) {
-        transform: rotate(-3deg) !important;
-        margin-top: 1rem !important;
+        transform: rotate(-2deg) !important;
+        margin-top: 0 !important;
     }
 
     .project-card:nth-child(2) {
-        transform: rotate(2deg) !important;
+        transform: rotate(1deg) !important;
         margin-top: 2rem !important;
     }
 
@@ -922,18 +945,18 @@ footer p {
     }
 
     .project-card:nth-child(4) {
-        transform: rotate(-2deg) !important;
-        margin-top: 1.5rem !important;
+        transform: rotate(-1deg) !important;
+        margin-top: 1rem !important;
     }
 
     .project-card:nth-child(5) {
-        transform: rotate(3deg) !important;
+        transform: rotate(2deg) !important;
         margin-top: -0.5rem !important;
     }
 
     .project-card:nth-child(6) {
         transform: rotate(-1deg) !important;
-        margin-top: 2rem !important;
+        margin-top: 1.5rem !important;
     }
 
     .project-number {
@@ -1093,7 +1116,7 @@ footer p {
     }
 
     .hero-content {
-        bottom: 10rem; /* Remonté de 15px sur très petits écrans */
+        bottom: 14rem; /* Remonté de 20px sur très petits écrans */
     }
 
     .color-strip {
@@ -1119,7 +1142,9 @@ footer p {
     }
 
     .project-card {
-        max-width: 80%; /* Encore plus petit sur très petits écrans */
+        max-width: 85%;
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 
     .project-number {
