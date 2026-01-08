@@ -27,21 +27,44 @@ body {
     padding: 0;
     z-index: 1001;
     position: relative;
+    transition: opacity 0.3s ease;
 }
 
-/* Desktop nav - simple fixed position */
+.burger-menu.hidden {
+    display: none !important;
+}
+
+/* Desktop nav - ensure everything works properly */
 @media (min-width: 1025px) {
     nav {
-        position: fixed;
-        top: 2rem;
-        left: 2rem;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(15px);
+        display: flex;
+        flex-direction: column;
     }
 
-    /* Hide burger menu on desktop */
+    .nav-links {
+        display: flex !important;
+        position: static !important;
+        background: none !important;
+        backdrop-filter: none !important;
+        padding: 0 !important;
+        flex-direction: column !important;
+        gap: 0.8rem !important;
+    }
+
+    .nav-links::before {
+        display: none !important;
+    }
+
+    .mobile-menu-header {
+        display: none !important;
+    }
+
     .burger-menu {
-        display: none;
+        display: none !important;
+    }
+
+    .mobile-menu-overlay {
+        display: none !important;
     }
 }
 
@@ -70,44 +93,46 @@ body {
 /* Mobile menu overlay - full black transparent underlay */
 .mobile-menu-overlay {
     display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.95);
-    z-index: 999;
-}
-
-.mobile-menu-overlay.open {
-    display: block;
 }
 
 /* Mobile close button - only on mobile */
+.mobile-close-btn {
+    display: none;
+}
+
 @media (max-width: 1024px) {
     .mobile-close-btn {
-        position: absolute;
-        top: 1.5rem;
-        right: 1.5rem;
-        width: 40px;
-        height: 40px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
         display: flex;
+        position: absolute;
+        top: -4rem;
+        right: 0;
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.15);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        cursor: pointer;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         z-index: 1003;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-close-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: rotate(90deg);
     }
 }
 
 .close-line {
-    width: 30px;
-    height: 3px;
+    width: 24px;
+    height: 2.5px;
     background: white;
     border-radius: 2px;
     position: absolute;
+    transition: all 0.3s ease;
 }
 
 .close-line:nth-child(1) {
@@ -121,8 +146,8 @@ body {
 .mobile-menu-header {
     position: relative;
     width: 100%;
-    height: 60px;
-    margin-bottom: 1rem;
+    height: 0;
+    margin-bottom: 0;
 }
 
 :root {
@@ -458,60 +483,47 @@ nav {
     z-index: 100;
 }
 
-/* Parallax scroll effect for project cards - BOTH desktop and mobile */
-.project-card {
-    transition: transform 0.3s ease-out;
-    will-change: transform;
-}
-
-.project-card.parallax-1 {
-    transform: translateY(calc(var(--scroll-y) * 0.05)) rotate(-2deg);
-}
-
-.project-card.parallax-2 {
-    transform: translateY(calc(var(--scroll-y) * 0.03)) rotate(1deg);
-}
-
-.project-card.parallax-3 {
-    transform: translateY(calc(var(--scroll-y) * 0.04)) rotate(1deg);
-}
-
-.project-card.parallax-4 {
-    transform: translateY(calc(var(--scroll-y) * 0.06)) rotate(-1deg);
-}
-
-.project-card.parallax-5 {
-    transform: translateY(calc(var(--scroll-y) * 0.02)) rotate(2deg);
-}
-
-.project-card.parallax-6 {
-    transform: translateY(calc(var(--scroll-y) * 0.05)) rotate(-1deg);
-}
-
-/* Mobile parallax - stronger effect */
-@media (max-width: 1024px) {
+/* Desktop parallax - subtle effect with original positioning */
+@media (min-width: 1025px) {
     .project-card.parallax-1 {
-        transform: translateY(calc(var(--scroll-y) * 0.1)) rotate(-2deg);
+        transform: translateY(calc(var(--scroll-y) * 0.015px)) rotate(-2deg);
     }
 
     .project-card.parallax-2 {
-        transform: translateY(calc(var(--scroll-y) * 0.08)) rotate(1deg);
+        transform: translateY(calc(var(--scroll-y) * 0.012px)) rotate(1deg);
     }
 
     .project-card.parallax-3 {
-        transform: translateY(calc(var(--scroll-y) * 0.09)) rotate(1deg);
+        transform: translateY(calc(var(--scroll-y) * 0.013px)) rotate(1deg);
     }
 
     .project-card.parallax-4 {
-        transform: translateY(calc(var(--scroll-y) * 0.12)) rotate(-1deg);
+        transform: translateY(calc(var(--scroll-y) * 0.018px)) rotate(-1deg);
     }
 
     .project-card.parallax-5 {
-        transform: translateY(calc(var(--scroll-y) * 0.07)) rotate(2deg);
+        transform: translateY(calc(var(--scroll-y) * 0.01px)) rotate(2deg);
     }
 
     .project-card.parallax-6 {
-        transform: translateY(calc(var(--scroll-y) * 0.1)) rotate(-1deg);
+        transform: translateY(calc(var(--scroll-y) * 0.015px)) rotate(-1deg);
+    }
+
+    .project-card:hover {
+        transform: rotate(0deg) scale(1.1) !important;
+        z-index: 100;
+    }
+}
+
+/* Mobile - let JavaScript handle transforms for scroll effect */
+@media (max-width: 1024px) {
+    .project-card {
+        transition: transform 0.05s linear;
+        will-change: transform;
+    }
+
+    .project-card:hover {
+        transform: scale(1.02) !important;
     }
 }
 
@@ -884,8 +896,8 @@ footer p {
         padding: 0.8rem 1.5rem;
         width: 100%;
         max-width: 100vw;
-        background: rgba(0, 0, 0, 0.95);
-        backdrop-filter: blur(25px);
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(20px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         position: fixed;
@@ -920,30 +932,25 @@ footer p {
     .nav-links {
         display: none;
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.98);
-        backdrop-filter: blur(50px);
-        padding: 5rem 2rem 2rem 2rem;
+        top: 5rem;
+        right: 1.5rem;
+        left: auto;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(20px);
+        padding: 2rem 1.5rem;
         margin: 0;
         flex-direction: column;
-        gap: 2rem;
-        z-index: 1000;
+        gap: 1.5rem;
+        z-index: 999;
         justify-content: flex-start;
-        align-items: center;
+        align-items: flex-start;
+        min-height: auto;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .nav-links::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.95);
-        z-index: -1;
+        display: none;
     }
 
     .nav-links.open {
@@ -964,19 +971,18 @@ footer p {
 
     .nav-link {
         writing-mode: horizontal-tb;
-        font-size: 1.8rem;
-        padding: 1.2rem 0;
-        border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-        width: 100%;
-        text-align: center;
-        opacity: 1;
+        font-size: 1.3rem;
+        padding: 0.8rem 0;
+        border-bottom: none;
+        width: auto;
+        text-align: left;
+        opacity: 0.9;
         transition: all 0.3s ease;
     }
 
     .nav-link:hover {
         opacity: 1;
-        border-bottom-color: rgba(255, 255, 255, 0.5);
-        transform: translateX(5px);
+        transform: translateX(3px);
     }
 
     /* Hero section improvements for better video visibility */

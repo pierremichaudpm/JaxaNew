@@ -55,29 +55,52 @@ const projects = [
 ];
 
 export default function Projects() {
-  const [scrollY, setScrollY] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       if (sectionRef.current) {
-        const rect = sectionRef.current.getBoundingClientRect();
-        const scrollPosition = window.scrollY - rect.top;
-        setScrollY(scrollPosition);
+        const sectionTop = sectionRef.current.offsetTop;
+        const scrollPosition = window.scrollY - sectionTop;
 
-        // Update CSS variable for parallax effect
+        // Update CSS variable for desktop parallax
         document.documentElement.style.setProperty(
           "--scroll-y",
-          `${scrollPosition}px`,
+          `${scrollPosition}`,
         );
+
+        // Mobile: Direct transform application
+        if (isMobile && cardsRef.current.length > 0) {
+          const rotations = [-3, 2, -2, 3, -4, 2];
+          const speeds = [0.1, 0.08, 0.09, 0.12, 0.07, 0.1];
+
+          cardsRef.current.forEach((card, index) => {
+            if (card) {
+              const movement = scrollPosition * speeds[index];
+              const rotation = rotations[index];
+              card.style.transform = `rotate(${rotation}deg) translateY(${movement}px)`;
+            }
+          });
+        }
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial call
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isMobile]);
 
   return (
     <section className="projects-section" id="projets" ref={sectionRef}>
@@ -90,6 +113,7 @@ export default function Projects() {
           {projects.map((project, index) => (
             <div
               key={project.id}
+              ref={(el) => (cardsRef.current[index] = el)}
               className={`project-card parallax-${index + 1}`}
             >
               <div className="project-image">

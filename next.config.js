@@ -5,8 +5,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Output standalone build for better Netlify compatibility
-  output: "standalone",
   // Disable TypeScript errors during build for Netlify
   typescript: {
     ignoreBuildErrors: true,
@@ -17,8 +15,6 @@ const nextConfig = {
   },
   // Enable trailing slashes for better static export compatibility
   trailingSlash: true,
-  // Configure for static export if needed
-  // output: 'export', // Uncomment if you want fully static export
 };
 
 module.exports = nextConfig;

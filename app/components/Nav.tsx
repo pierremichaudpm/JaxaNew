@@ -1,19 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Simple mobile detection
-  if (typeof window !== "undefined") {
+  // Simple mobile detection using useEffect
+  useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 1024);
-    if (isMobile === false) {
-      checkMobile();
-      window.addEventListener("resize", checkMobile);
-    }
-  }
+
+    // Initial check
+    checkMobile();
+
+    // Add event listener for resize
+    window.addEventListener("resize", checkMobile);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -37,7 +44,7 @@ export default function Nav() {
 
       {/* Burger menu for mobile */}
       <button
-        className="burger-menu"
+        className={`burger-menu ${isMenuOpen ? "hidden" : ""}`}
         onClick={toggleMenu}
         aria-label={
           isMenuOpen ? "Close navigation menu" : "Open navigation menu"
