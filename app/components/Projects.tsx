@@ -8,7 +8,7 @@ const projects = [
     id: 1,
     title: "Les Anciens",
     year: "2019",
-    type: "Production Aquatique",
+    type: "",
     image: "/images/posters/les-anciens.png",
     alt: "Les Anciens",
   },
@@ -16,7 +16,7 @@ const projects = [
     id: 2,
     title: "Cibles Rouges",
     year: "2018",
-    type: "Production Aquatique",
+    type: "",
     image: "/images/posters/cibles-rouges.png",
     alt: "Cibles Rouges",
   },
@@ -24,7 +24,7 @@ const projects = [
     id: 3,
     title: "DysMorphia",
     year: "2017",
-    type: "Production Aquatique",
+    type: "",
     image: "/images/posters/dysmorphia.png",
     alt: "DysMorphia",
   },
@@ -32,7 +32,7 @@ const projects = [
     id: 4,
     title: "Oculus",
     year: "2016",
-    type: "Production Aquatique",
+    type: "",
     image: "/images/posters/oculus.png",
     alt: "Oculus",
   },
@@ -40,7 +40,7 @@ const projects = [
     id: 5,
     title: "Serie AR",
     year: "2014",
-    type: "Production Aquatique",
+    type: "",
     image: "/images/posters/serie-ar.png",
     alt: "Serie AR",
   },
@@ -48,7 +48,7 @@ const projects = [
     id: 6,
     title: "Joseph Rouleau",
     year: "2006",
-    type: "Production Aquatique",
+    type: "",
     image: "/images/posters/joseph-rouleau.png",
     alt: "Joseph Rouleau",
   },
@@ -113,7 +113,9 @@ export default function Projects() {
           {projects.map((project, index) => (
             <div
               key={project.id}
-              ref={(el) => (cardsRef.current[index] = el)}
+              ref={(el) => {
+                cardsRef.current[index] = el;
+              }}
               className={`project-card parallax-${index + 1}`}
             >
               <div className="project-image">
@@ -138,9 +140,7 @@ export default function Projects() {
                 </div>
                 <div className="project-info">
                   <h3 className="project-title">{project.title}</h3>
-                  <p className="project-meta">
-                    {project.year} • {project.type}
-                  </p>
+                  <p className="project-meta">{project.year}</p>
                 </div>
               </div>
             </div>

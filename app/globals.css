@@ -1002,7 +1002,7 @@ footer p {
     }
 
     .hero-content {
-        bottom: 14.75rem; /* Lowered by 20px (was 16rem) */
+        bottom: 6.75rem; /* 20px lower than desktop (8rem - 1.25rem) */
         padding: 0 1.5rem;
         width: 100%;
     }
@@ -1269,7 +1269,7 @@ footer p {
     }
 
     .hero-content {
-        bottom: 12.75rem; /* Lowered by 20px (was 14rem) */
+        bottom: 6.75rem; /* 20px lower than desktop (8rem - 1.25rem) */
     }
 
     .color-strip {
