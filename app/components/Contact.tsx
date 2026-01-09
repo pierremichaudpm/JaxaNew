@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 export default function Contact() {
   return (
@@ -11,16 +11,20 @@ export default function Contact() {
         </div>
         <div className="contact-item">
           <h3>Téléphone</h3>
-          <a href="tel:+15148138788">+1 (514) 813-8788</a>
+          <a href="tel:+15145789989">+1 (514) 578-9989</a>
         </div>
         <div className="contact-item">
           <h3>Localisation</h3>
-          <p>Montréal, Québec<br />Canada</p>
+          <p>
+            Montréal, Québec
+            <br />
+            Canada
+          </p>
         </div>
       </div>
       <div className="contact-side">
         <h3>SUIVEZ NOTRE ACTUALITÉ</h3>
       </div>
     </section>
-  )
+  );
 }
