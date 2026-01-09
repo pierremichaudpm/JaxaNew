@@ -318,17 +318,10 @@ nav {
     font-size: clamp(4rem, 15vw, 20rem);
     font-weight: 700;
     line-height: 0.8;
-    letter-spacing: -12px;
+    letter-spacing: -0.125em;
     color: white;
     margin-bottom: 2rem;
     text-shadow: 0 0 80px rgba(0, 0, 0, 0.8);
-}
-
-/* Hide JAXA title on mobile */
-@media (max-width: 1024px) {
-    .hero-title {
-        display: none;
-    }
 }
 
 .hero-subtitle {
@@ -1016,10 +1009,9 @@ footer p {
 
     .hero-title {
         font-size: clamp(5rem, 18vw, 22rem);
-        letter-spacing: -14px;
+        letter-spacing: -0.05em;
         margin-bottom: 1.5rem;
         text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
-        display: none; /* Hide on mobile */
     }
 
     .hero-subtitle {
@@ -1265,7 +1257,7 @@ footer p {
 
     .hero-title {
         font-size: clamp(4rem, 16vw, 18rem);
-        letter-spacing: -12px;
+        letter-spacing: -0.03125em;
     }
 
     .hero-subtitle {

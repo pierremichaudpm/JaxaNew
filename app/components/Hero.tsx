@@ -15,7 +15,7 @@ export default function Hero() {
       <div className="floating-shape shape-circle"></div>
       <div className="floating-shape shape-square"></div>
       <div className="hero-content">
-        <h1 className="hero-title desktop-only">JAXA</h1>
+        <h1 className="hero-title">JAXA</h1>
         <p className="hero-subtitle">
           Nous créons des expériences immersives où culture, humain et
           créativité rayonnent.
